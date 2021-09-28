@@ -5,6 +5,8 @@ export const Container = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 `
 
 export const Header = styled.header`
@@ -27,27 +29,14 @@ export const Title = styled.h1`
 
 `
 
-export const DetailContainer = styled.div`
-    width: 50%;
-    height: auto;
-    margin-top:80px;
-    margin-left: 160px;
-`
-export const Para = styled.p`
-    margin:0px;
-    width: 80%;
-    color: white;
-    font-size: 1.3em;
-    user-select: none;
-    
-`
+
+
 
 export const OptionContainer = styled.div`
-    width: 100%;
-    height: 70%;
+    display:flex;
+    flex:1;
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-direction: column-reverse;
     align-items: center;
 `
 
@@ -68,5 +57,49 @@ export const IconContainer = styled.div`
     &:hover{
         transition: all 0.2s ease-in-out;
         transform: scale(1.2);
+    }
+`
+
+export const DetailContainer = styled.div`
+   
+    display:flex;
+    flex:1.5;
+
+`
+
+export const DetailTitle = styled.h2`
+    color: white;
+    margin:0;
+    padding:0;
+    font-size: 3.5em;
+    user-select: none;
+    
+`
+
+export const Para = styled.p`
+    margin:0px;
+    width: 80%;
+    color: white;
+    font-size: 1.3em;
+    user-select: none;
+    
+`
+
+export const Block = styled.div`
+    display: flex;
+    flex-direction: column-reverse;
+    animation: moving 0.2s ease-in-out ;
+
+    padding: 40px;
+    margin-top: auto;
+    background-color: rgba(50,50,50,0.5);
+
+    @keyframes moving{
+        0% {
+            transform: translateY(100px);
+        }
+        100% {
+            transform:  translateY(0px)
+        }
     }
 `

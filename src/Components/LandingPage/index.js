@@ -5,11 +5,6 @@ import CircularButton from '../CircularButton'
 import FirstPageAbstract from '../FirstPageAbstract'
 import { ArrowIcon, ArrowIconShort, Container, DetailContainer, Header, Para, StyledButton, Title } from './LandingPageElement'
 
-
-
-
-
-
 const LandingPage = () => {
     const [HoverOverButton,setHoverOverButton] = React.useState(false);
     
