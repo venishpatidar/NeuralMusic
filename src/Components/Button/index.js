@@ -3,9 +3,7 @@ import { StyledButton } from './ButtonComponent'
 
 const Button = (props) => {
     return (
-        <StyledButton>
-            {props.children}
-        </StyledButton>
+       <></>
     )
 }
 

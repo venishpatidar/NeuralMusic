@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {BsQuestion,BsArrowLeftShort} from "react-icons/bs"
+import {NavLink} from 'react-router-dom';
 
 export const Container = styled.div`
     width: 3rem;
@@ -9,7 +10,7 @@ export const Container = styled.div`
 `
 
 
-export const Circle = styled.div`
+export const Circle = styled(NavLink)`
     width: 2rem;
     height: 2rem;
     align-self: center;
@@ -26,7 +27,6 @@ export const Circle = styled.div`
 `
 
 export const QuestionMark = styled(BsQuestion)`
-    color: white;
     font-size: 2rem;
 `
 export const BackArrow = styled(BsArrowLeftShort)`

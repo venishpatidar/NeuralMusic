@@ -7,18 +7,19 @@ const CircularButton = (props) => {
     const {
         backArrow=false,
         questionMark=false,
+        to="/home"
     } = props
     return (
         <Container>
-            <Circle>
+            <Circle to={to}>
                 {backArrow?
-                    <BackArrow/>
+                    <BackArrow />
                     :
                     null
                 }
 
                 {questionMark?
-                    <QuestionMark/>
+                    <QuestionMark />
                     :
                     null
                 }
