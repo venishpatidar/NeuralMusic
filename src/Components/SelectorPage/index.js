@@ -34,7 +34,7 @@ const ListDetails = [
 
 
 const SelectorPage = () => {
-    const [selectedOption , setSelectedOption] = React.useState(0)
+    const [selectedOption , setSelectedOption] = React.useState(-1)
 
     return (
         <Canvas>
