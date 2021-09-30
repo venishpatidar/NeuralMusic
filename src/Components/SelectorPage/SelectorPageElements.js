@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {BsArrowRight, BsArrowRightShort} from "react-icons/bs";
 import {NavLink} from 'react-router-dom';
 export const Container = styled.div`
     position: absolute;
@@ -40,7 +39,7 @@ export const OptionContainer = styled.div`
     align-items: center;
 `
 
-export const IconContainer = styled.div`
+export const IconContainer = styled(NavLink)`
     width: 150px;
     height: 150px;
     border-radius: 150px;

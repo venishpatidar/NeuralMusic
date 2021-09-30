@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from '../Button'
 import Canvas from '../Canvas'
 import CircularButton from '../CircularButton'
 import FirstPageAbstract from '../FirstPageAbstract'

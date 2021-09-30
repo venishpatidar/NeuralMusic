@@ -458,8 +458,8 @@ document.onmousemove = function(event) {
 function pointerCheck() {
   var HorusEye = document.getElementById("HorusEye")
   var {x,y} = HorusEye.getBoundingClientRect()
-  var directionX = pointerX==-1?x:pointerX-x;  
-  var directionY = pointerY==-1?y:pointerY-y; 
+  var directionX = pointerX===-1?x:pointerX-x;  
+  var directionY = pointerY===-1?y:pointerY-y; 
   var unitVect = Math.sqrt(Math.pow(directionX,2)+Math.pow(directionY,2))
   HorusEye.style.transform =  `translate(${(directionX/unitVect)*15}px,${(directionY/unitVect)*5}px)`
 }

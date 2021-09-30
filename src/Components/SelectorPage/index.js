@@ -54,23 +54,23 @@ const SelectorPage = () => {
                 </Header>
                 <OptionContainer>
                     <div style={{justifyContent:'space-evenly',display:"flex",width:'80%',flexDirection:"row"}}>
-                        <IconContainer onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(0)}}>
+                        <IconContainer to="/NeuralPiano" onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(0)}}>
                             <div style={{width:"75px",height:"75px",}}>
                                 <Piano/>
                             </div>
                         </IconContainer>
-                        <IconContainer onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(1)}}>
+                        <IconContainer to="/" onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(1)}}>
                             <div style={{width:"75px",height:"75px",}}>
                                 <MiceQues/>
                             </div>
                         </IconContainer>
 
-                        <IconContainer onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(2)}}>
+                        <IconContainer to="/" onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(2)}}>
                             <div style={{width:"75px",height:"75px",}}>
                                 <HindiSript/>
                             </div>
                         </IconContainer>
-                        <IconContainer onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(3)}}>
+                        <IconContainer to="/" onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(3)}}>
                             <div style={{width:"75px",height:"75px",}}>
                                 <NeuralNetworkSvg/>
                             </div>
