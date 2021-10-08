@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.pool{
+  position: absolute;
+    width: 45px;
+    left: 0;
+    height: 25px;
+    bottom: 178px;
+    background-color: #00bfff;
+    animation: movingKeyTrail 6s linear;
+}
+@keyframes movingKeyTrail{
+  0% {
+      transform: translateY(0px);
+  }
+  100% {
+      transform:  translateY(-1080px)
+  }
+}
