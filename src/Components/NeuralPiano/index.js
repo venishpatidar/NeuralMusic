@@ -2,32 +2,39 @@ import React from 'react'
 import Canvas from '../Canvas'
 import { Container, Header, HeaderContainer, LoaderContainer, LoaderImage, Para, PianoContainer } from './NeuralPianoComponent'
 import CircularButton from '../CircularButton'
-import {SERVER_BASE_ADDR} from './../../utils';
+import {NEURAL_PIANO_SERVER_ADDR} from './../../utils';
 
 
 
 function CreateKeyTrail(elementId,height=25,color="#00bfff"){
     // Creating KeyTrail 
-    let keytrail = document.createElement('div')
-    let el1 = document.getElementById(elementId);
+    
+    try{
+        let keytrail = document.createElement('div')
+        let el1 = document.getElementById(elementId);
 
-    
-    // el1.id = elementId+"keytrail"
-    const {width,left,top } = el1.getBoundingClientRect()
+        
+        // el1.id = elementId+"keytrail"
 
-    //  Assigining Custome class ; located at index.css
-    keytrail.className = "pool"
-     
-    //  Definig positon and width
-    keytrail.style="left:"+left+"px;width:"+width+"px;height:"+height+"px;top:"+top+"px;background-color:"+color+';'
-    
-    // Adding as child to Piano Container to get render on screen
-    document.getElementById('pianoContainer').appendChild(keytrail)
-    
-    // timeout to remove keytrail after 4.5s
-    setTimeout(()=>{
-        keytrail.remove();
-    },4500)
+        const {width,left,top } = el1.getBoundingClientRect()
+
+        //  Assigining Custome class ; located at index.css
+        keytrail.className = "pool"
+        
+        //  Definig positon and width
+        keytrail.style="left:"+left+"px;width:"+width+"px;height:"+height+"px;top:"+top+"px;background-color:"+color+';'
+        
+        // Adding as child to Piano Container to get render on screen
+        document.getElementById('pianoContainer').appendChild(keytrail)
+        
+        // timeout to remove keytrail after 4.5s
+        setTimeout(()=>{
+            keytrail.remove();
+        },4500)
+    }
+    catch{
+        
+    }
 }
 
 // function SetHeightOfTrail(elementId,height=25){
@@ -468,6 +475,8 @@ export default class NeuralPiano extends React.Component{
             loaded:false,
             timeGap:2000,
             keyHistory:[],
+            err:false,
+            errMessage:'',
         }
         this.addToKeyHitory = this.addToKeyHitory.bind(this)
         this.historyTimeOut=null;
@@ -479,18 +488,32 @@ export default class NeuralPiano extends React.Component{
         // Intial call to boot up neural network
         let obj = {'keys':['C4']}
         
-        fetch(SERVER_BASE_ADDR,{
+        fetch(NEURAL_PIANO_SERVER_ADDR,{
             method:"POST",
             body:JSON.stringify(obj),
-           
         })
         .then((response)=>{
-            return response.json()
-        })
+            if(response.status===200){
+                return response.json()
+            }
+            else{
+                var error = new Error('Error on server side ERROR STATUS ' + response.status + ': ' + response.statusText+' Please refresh or press F5');
+                error.response = response;
+                throw error;
+            }
+        },error=>{throw error})
         .then((response)=>{
             // PREDICT = response.predict
             console.log("Neural Network Booted up")
             this.setState({loaded:true})
+        })
+        .catch((error)=>{
+            if(error.message==="Failed to fetch"){
+                this.setState({err:true,loaded:true,errMessage:"UH OH.... SERVER DOWN"})
+            }
+            else{
+                this.setState({err:true,loaded:true,errMessage:error.message})
+            }
         })
 
     }
@@ -537,19 +560,26 @@ export default class NeuralPiano extends React.Component{
                 'keys':this.state.keyHistory,
             }
             let PREDICT;
-            await fetch(SERVER_BASE_ADDR,{
+            await fetch(NEURAL_PIANO_SERVER_ADDR,{
                 method:"POST",
                 body:JSON.stringify(obj),
                
             })
             .then((response)=>{
-                return response.json()
-            })
+                if(response.status===200){
+                    return response.json()
+                }
+                else{
+                    var error = new Error('Error on server side ERROR STATUS ' + response.status + ': ' + response.statusText+' Please refresh or press F5');
+                    error.response = response;
+                    throw error;
+                }
+            },error=>{throw error})
             .then((response)=>{
                 PREDICT = response.predict
             })
+            .catch((error)=>{this.setState({err:true,loaded:true,errMessage:error.message})})
 
-            console.log(PREDICT)
             
             
             function wait(milleseconds) {
@@ -594,7 +624,15 @@ export default class NeuralPiano extends React.Component{
         return(
             <Canvas>
                 <Container>
-
+                    {this.state.err?
+                        <LoaderContainer>
+                            <Para>{this.state.errMessage}</Para>
+                        </LoaderContainer>
+                        :
+                        null
+                    }
+                    
+                    
                     {this.state.loaded?
                         null
                         :

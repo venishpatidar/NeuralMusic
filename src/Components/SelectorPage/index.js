@@ -59,18 +59,18 @@ const SelectorPage = () => {
                                 <Piano/>
                             </div>
                         </IconContainer>
-                        <IconContainer to="/" onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(1)}}>
+                        <IconContainer to="/NeuralSingerIdentifier" onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(1)}}>
                             <div style={{width:"75px",height:"75px",}}>
                                 <MiceQues/>
                             </div>
                         </IconContainer>
 
-                        <IconContainer to="/" onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(2)}}>
+                        <IconContainer to="/NeuralLyricsGenerator" onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(2)}}>
                             <div style={{width:"75px",height:"75px",}}>
                                 <HindiSript/>
                             </div>
                         </IconContainer>
-                        <IconContainer to="/" onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(3)}}>
+                        <IconContainer to="/NeuralSongGenerator" onMouseLeave={()=>{setSelectedOption(-1)}} onMouseEnter={()=>{setSelectedOption(3)}}>
                             <div style={{width:"75px",height:"75px",}}>
                                 <NeuralNetworkSvg/>
                             </div>
