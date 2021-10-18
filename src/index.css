@@ -29,3 +29,44 @@ code {
       transform:  translateY(-1080px)
   }
 }
+
+
+.block {
+	position: relative;
+	width: fit-content;
+	height: fit-content;
+	background: linear-gradient(0deg, #000, #272727);
+}
+
+.block:before, .block:after {
+	content: '';
+	position: absolute;
+	left: -2px;
+	top: -2px;
+	/* background: linear-gradient(45deg, #440154, #453681, #32638d,#228b8d, #33b679, #90d643, 
+		#fde724, #00ff00,#ffff00, #ff0000); */
+	background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
+	#0000ff, #00ff00,#ffff00, #ff0000);
+	background-size: 400%;
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	z-index: -1;
+	animation: steam 20s alternate infinite;
+}
+
+@keyframes steam {
+	0% {
+		background-position: 0 0;
+	}
+	50% {
+		background-position: 400% 0;
+	}
+	100% {
+		background-position: 0 0;
+	}
+}
+.block:after {
+	filter: blur(50px);
+}
+
+

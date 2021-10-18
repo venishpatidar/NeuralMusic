@@ -85,7 +85,20 @@ function SvgComponent(props) {
           y2={185.23}
           xlinkHref="#prefix__White_Black"
         />
-        <style>{".prefix__cls-4{fill:#fff}"}</style>
+        <style>{`.prefix__cls-4{fill:#fff; animation: a 6s ease-in-out infinite}       
+                  @keyframes a {
+                    0% {
+                      fill:#000;
+                    }
+                    50% {
+                      fill:#fff;
+                    }
+                    100% {
+                      fill:#000;
+                    }
+                  }
+        
+        `}</style>
       </defs>
       <g
         style={{

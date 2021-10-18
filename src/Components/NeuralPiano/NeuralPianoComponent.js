@@ -25,7 +25,7 @@ export const HeaderContainer = styled.div`
 `
 
 export const PianoContainer = styled.div`
-    transition: all 2000ms linear;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
     display: flex;
     flex:1;
     flex-direction: column;
@@ -93,4 +93,50 @@ export const LoaderImage = styled.img`
             transform:  rotate(0deg)
         }
     }
+`
+
+
+export const InstrumentSelectionContainer = styled.div`
+    position: absolute;
+    bottom: 20%;
+    right: 2px;
+    width: 300px;
+    height: 50px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: height 0.2s ease-in-out;
+`
+
+export const InstrumentListContainer = styled.div`
+    ::-webkit-scrollbar {
+        width: 10px;
+    };
+    ::-webkit-scrollbar-button {
+        background: #ccc;
+    };
+    ::-webkit-scrollbar-track-piece {
+        background: #808080;
+    };
+    
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    align-items: center;
+    justify-content: center;
+    ::-webkit-scrollbar-thumb{
+        background: #efefef;
+    }
+   
+`
+
+export const ListItems = styled.div`
+    background:${({index})=>(index?"rgba(100,100,100,0.5)":"rgba(0,0,0,0.5)")};
+    padding-top:5px;
+    padding-bottom: 5px;
+    
 `

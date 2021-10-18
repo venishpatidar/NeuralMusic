@@ -106,7 +106,9 @@ class NeuralSingerIdentifier extends React.Component {
 
                     {this.state.err?
                         <LoaderContainer>
-                            <Para>{this.state.errmessage}</Para>
+                            <div className="block" style={{width:"50%",height:"50%",display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+                                <Para>{this.state.errmessage}</Para>
+                            </div>
                         </LoaderContainer>
                         :
                         null

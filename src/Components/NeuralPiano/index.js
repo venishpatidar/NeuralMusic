@@ -1,10 +1,141 @@
 import React from 'react'
 import Canvas from '../Canvas'
-import { Container, Header, HeaderContainer, LoaderContainer, LoaderImage, Para, PianoContainer } from './NeuralPianoComponent'
+import { Container, Header, HeaderContainer, InstrumentListContainer, InstrumentSelectionContainer, ListItems, LoaderContainer, LoaderImage, Para, PianoContainer } from './NeuralPianoComponent'
 import CircularButton from '../CircularButton'
 import {NEURAL_PIANO_SERVER_ADDR} from './../../utils';
+import { BsArrowUp } from 'react-icons/bs';
 
-
+const INSTRUMENT_LIST = [
+    "accordion",
+    "acoustic_bass",
+    "acoustic_grand_piano",
+    "acoustic_guitar_nylon",
+    "acoustic_guitar_steel",
+    "agogo",
+    "alto_sax",
+    "applause",
+    "bagpipe",
+    "banjo",
+    "baritone_sax",
+    "bassoon",
+    "bird_tweet",
+    "blown_bottle",
+    "brass_section",
+    "breath_noise",
+    "bright_acoustic_piano",
+    "celesta",
+    "cello",
+    "choir_aahs",
+    "church_organ",
+    "clarinet",
+    "clavinet",
+    "contrabass",
+    "distortion_guitar",
+    "drawbar_organ",
+    "dulcimer",
+    "electric_bass_finger",
+    "electric_bass_pick",
+    "electric_grand_piano",
+    "electric_guitar_clean",
+    "electric_guitar_jazz",
+    "electric_guitar_muted",
+    "electric_piano_1",
+    "electric_piano_2",
+    "english_horn",
+    "fiddle",
+    "flute",
+    "french_horn",
+    "fretless_bass",
+    "fx_1_rain",
+    "fx_2_soundtrack",
+    "fx_3_crystal",
+    "fx_4_atmosphere",
+    "fx_5_brightness",
+    "fx_6_goblins",
+    "fx_7_echoes",
+    "fx_8_scifi",
+    "glockenspiel",
+    "guitar_fret_noise",
+    "guitar_harmonics",
+    "gunshot",
+    "harmonica",
+    "harpsichord",
+    "helicopter",
+    "honkytonk_piano",
+    "kalimba",
+    "koto",
+    "lead_1_square",
+    "lead_2_sawtooth",
+    "lead_3_calliope",
+    "lead_4_chiff",
+    "lead_5_charang",
+    "lead_6_voice",
+    "lead_7_fifths",
+    "lead_8_bass__lead",
+    "marimba",
+    "melodic_tom",
+    "music_box",
+    "muted_trumpet",
+    "oboe",
+    "ocarina",
+    "orchestra_hit",
+    "orchestral_harp",
+    "overdriven_guitar",
+    "pad_1_new_age",
+    "pad_2_warm",
+    "pad_3_polysynth",
+    "pad_4_choir",
+    "pad_5_bowed",
+    "pad_6_metallic",
+    "pad_7_halo",
+    "pad_8_sweep",
+    "pan_flute",
+    "percussive_organ",
+    "percussion",
+    "piccolo",
+    "pizzicato_strings",
+    "recorder",
+    "reed_organ",
+    "reverse_cymbal",
+    "rock_organ",
+    "seashore",
+    "shakuhachi",
+    "shamisen",
+    "shanai",
+    "sitar",
+    "slap_bass_1",
+    "slap_bass_2",
+    "soprano_sax",
+    "steel_drums",
+    "string_ensemble_1",
+    "string_ensemble_2",
+    "synth_bass_1",
+    "synth_bass_2",
+    "synth_brass_1",
+    "synth_brass_2",
+    "synth_choir",
+    "synth_drum",
+    "synth_strings_1",
+    "synth_strings_2",
+    "taiko_drum",
+    "tango_accordion",
+    "telephone_ring",
+    "tenor_sax",
+    "timpani",
+    "tinkle_bell",
+    "tremolo_strings",
+    "trombone",
+    "trumpet",
+    "tuba",
+    "tubular_bells",
+    "vibraphone",
+    "viola",
+    "violin",
+    "voice_oohs",
+    "whistle",
+    "woodblock",
+    "xylophone"
+]
 
 function CreateKeyTrail(elementId,height=25,color="#00bfff"){
     // Creating KeyTrail 
@@ -30,7 +161,7 @@ function CreateKeyTrail(elementId,height=25,color="#00bfff"){
         // timeout to remove keytrail after 4.5s
         setTimeout(()=>{
             keytrail.remove();
-        },4500)
+        },5000)
     }
     catch{
         
@@ -454,6 +585,7 @@ export default class NeuralPiano extends React.Component{
     constructor(props){
         super(props);
         this.Soundfont = require('soundfont-player')
+
         this.ac = new (window.AudioContext || window.webkitAudioContext)();
         this.Piano = this.Soundfont.instrument(this.ac, 'acoustic_grand_piano')
         this.listenr = (e)=>{
@@ -477,6 +609,8 @@ export default class NeuralPiano extends React.Component{
             keyHistory:[],
             err:false,
             errMessage:'',
+            showInstrumentList:false,
+            selectedInstrument:'piano'
         }
         this.addToKeyHitory = this.addToKeyHitory.bind(this)
         this.historyTimeOut=null;
@@ -606,7 +740,9 @@ export default class NeuralPiano extends React.Component{
                 }
             })
             .then(()=>{
-                pianoContainer.style.background = 'radial-gradient(farthest-corner at 50% -500px, rgba(0, 191, 255, 1)  ,transparent , transparent)'
+                setTimeout(()=>{
+                    pianoContainer.style.background = 'radial-gradient(farthest-corner at 50% -500px, rgba(0, 191, 255, 1)  ,transparent , transparent)'
+                },5000)
             })
           
             console.log(this.state.keyHistory)
@@ -626,7 +762,9 @@ export default class NeuralPiano extends React.Component{
                 <Container>
                     {this.state.err?
                         <LoaderContainer>
-                            <Para>{this.state.errMessage}</Para>
+                            <div className="block" style={{width:"50%",height:"50%",display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+                                <Para>{this.state.errMessage}</Para>
+                            </div>
                         </LoaderContainer>
                         :
                         null
@@ -650,8 +788,37 @@ export default class NeuralPiano extends React.Component{
                         <CircularButton questionMark={true}/>
                     </Header>
                     </HeaderContainer>
-                    <PianoContainer id="pianoContainer">
-                        <div style={{display:'flex',position:'absolute',zIndex:10,justifyContent:'center',height:"20%"}}>
+                    <PianoContainer  style={{filter:!this.state.loaded?'blur(20px)':''}} id="pianoContainer">
+
+                        <InstrumentSelectionContainer id="InstrumentSelectionContainer" >
+                            {this.state.showInstrumentList?
+                            <InstrumentListContainer  >
+                                {INSTRUMENT_LIST.map((data,index)=>{
+                                    return(
+                                        <ListItems onClick={()=>{
+                                            this.Piano = this.Soundfont.instrument(this.ac, data)
+                                            var cont = document.getElementById('InstrumentSelectionContainer');
+                                            cont.style.height = '50px'
+                                            this.setState({showInstrumentList:false,selectedInstrument:data});
+                
+                                        }} index={index%2}>
+                                            <Para style={{width:'100%',textAlign:'center',}}>{data.replace(/_/g,' ')}</Para>
+                                        </ListItems>
+                                    )
+                                })}
+                            </InstrumentListContainer>
+                            :
+                            <div onClick={()=>{
+                                var cont = document.getElementById('InstrumentSelectionContainer')
+                                cont.style.height = '50%'
+                                this.setState({showInstrumentList:true})
+                                }} style={{width:'100%',display:'flex',alignItems:'center'}}>
+                                <Para style={{width:'100%',textAlign:'center',}}>{this.state.selectedInstrument}</Para>
+                            </div>
+                            }
+                        </InstrumentSelectionContainer>
+
+                        <div style={{display:'flex',position:'absolute',zIndex:10,justifyContent:'center',height:"20%"}} >
                             {PianoKeys.map((data,index)=>{
                                 return(
                                     <div key={index}>
@@ -664,9 +831,7 @@ export default class NeuralPiano extends React.Component{
                                 )
                             })}
                             
-                        
                         </div>
-                    
                     </PianoContainer>
                 </Container>
             </Canvas>

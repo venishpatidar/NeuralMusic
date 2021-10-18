@@ -27,7 +27,7 @@ export const HeaderContainer = styled.div`
 
 
 export const ContentContainer = styled.div`
-    transition: all 2000ms linear;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
     display: flex;
     flex:1;
     flex-direction: column;
@@ -73,7 +73,7 @@ export const GenrateButton = styled.button`
     border-radius: 5px;
     padding: 5px 35px;
     width: 250px;
-    transition: all 0.4s ease-in;
+    transition: background-color 0.4s ease-in;
     &:hover{
         background-color: white;
         color: black;

@@ -4,9 +4,6 @@ import Canvas from '../Canvas'
 import CircularButton from '../CircularButton'
 import { Container,HeaderContainer,Header, ContentContainer,TextContainer, TextAreaContainer, GenrateButton, GeneratedTextContainer, GeneratedText, LoaderImage, LoaderContainer, Para} from './NeuralLyricsGeneratorComponent'
 
-const TextSample = 'Lorem ipsum dolor sit amet , consectetur adipiscing elit. Curabitur sed lectus a lectus euismod rhoncus. Cras ornare fermentum lacus. Phasellus laoreet commodo semper. Cras volutpat, nunc non ullamcorper suscipit, ipsum dui ultricies sapien, quis cursus urna libero rhoncus augue. Aliquam semper at tortor sit amet consequat. Vestibulum elit erat, pulvinar ut tristique eu, sollicitudin sed risus. Cras ultricies metus ac pulvinar pellentesque.'
-
-
 class NeuralLyricsGenerator extends React.Component{
 
     constructor(props){
@@ -66,7 +63,9 @@ class NeuralLyricsGenerator extends React.Component{
                     </HeaderContainer>
                     {this.state.err?
                         <LoaderContainer>
-                            <Para>{this.state.errmessage}</Para>
+                            <div className="block" style={{width:"50%",height:"50%",display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+                                <Para>{this.state.errmessage}</Para>
+                            </div>
                         </LoaderContainer>
                         :
                         null
@@ -82,7 +81,7 @@ class NeuralLyricsGenerator extends React.Component{
                     }
 
 
-                    <ContentContainer>
+                    <ContentContainer style={{filter:this.state.isLoading?'blur(20px)':''}}> 
                         {!this.state.generateLyrics?    
                             <TextContainer>
                                 <TextAreaContainer value={this.state.keywords} placeholder="Input Keywords" onInput={(e)=>{this.setState({keywords:e.target.value})}} />

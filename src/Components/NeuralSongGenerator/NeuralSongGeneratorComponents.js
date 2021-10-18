@@ -26,7 +26,7 @@ export const HeaderContainer = styled.div`
 `
 
 export const ContentContainer = styled.div`
-    transition: all 2000ms linear;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
     display: flex;
     flex:1;
     flex-direction: column;
@@ -34,7 +34,6 @@ export const ContentContainer = styled.div`
     background: radial-gradient(farthest-corner at 50% -500px, #00bfff  ,transparent , transparent);
     justify-content: center;
     align-items: center;
-    
 `
 
 export const HeatMapBoxContainer = styled.div`
@@ -42,7 +41,7 @@ export const HeatMapBoxContainer = styled.div`
     height: 100%;
     display: grid;
     grid-template-columns: repeat(16,1fr) ;
-`
+`  
 
 export const HeatMapBox = styled.div`
     /* width: 40px; */
@@ -51,32 +50,38 @@ export const HeatMapBox = styled.div`
     height:'NaN';
     /* background-color: darkblue; */
     background-color:${({backgroundHeatMapColor})=>(backgroundHeatMapColor?backgroundHeatMapColor:'darkblue')};
-    transition: all 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
+    overflow: hidden;
+    p{
+        visibility: hidden;
+    }
     &:hover{
         transform: scale(1.2);
         border-style:solid;
         border-width: 1px;
         border-color: white;
         cursor: pointer;
-
+        p{
+            visibility: visible;
+        }
     }
-
+    
 `
 
 export const ColorBar = styled.div`
     height: 100%;
     width: 30px;
     background: rgb(68,1,84);
-    background: linear-gradient(0deg, rgba(68,1,84,1) 0%, rgba(62,73,137,1) 25%, rgba(34,139,141,1) 50%, rgba(79,195,105,1) 75%, rgba(253,231,36,1) 100%);
+    background: linear-gradient(0deg, rgba(68,1,84,1) 0%, rgba(69,54,129,1) 16%, rgba(50,99,141,1) 33%, rgba(34,139,141,1) 50%, rgba(51,182,121,1) 66%, rgba(144,214,67,1) 83%, rgba(253,231,36,1) 100%);
     margin-left:10px;
 `
 export const HeatMapPlot = styled.div`
     display: flex;
     flex-direction: row;
     width: 100%;
-    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    height: 40%;
 
 `
 export const ColorBarAxis = styled.div`
@@ -128,9 +133,144 @@ export const Button = styled.button`
     border-radius: 5px;
     padding: 5px 35px;
     width: 250px;
-    transition: all 0.4s ease-in;
+    transition: background-color  0.4s ease-in;
     &:hover{
         background-color: white;
         color: black;
     }
+`
+export const LoaderImage = styled.img`
+    width: 400px;
+    height: 400px;
+    object-fit: fill;
+    position: absolute;
+    animation: rotateLoaderLogo 2s ease-in-out infinite;
+    @keyframes rotateLoaderLogo{
+        0% {
+            transform: rotate(0deg)
+        }
+        60% {
+            transform:  rotate(180deg)
+        }
+        90% {
+            transform:  rotate(-5deg)
+        }
+        100% {
+            transform:  rotate(0deg)
+        }
+    }
+`
+
+export const LoaderContainer = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    flex-direction:column;
+    align-items: center;
+
+`
+
+export const Para = styled.p`
+    margin:0px;
+    width: 80%;
+    color: white;
+    font-size: 1.3em;
+    user-select: none;
+    text-align:center;
+    
+`
+
+
+
+
+
+
+
+
+export const WaveformContianer = styled.div`
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;
+    justify-content:flex-end;
+    padding-bottom: 100px;
+    width: 100%;
+`
+
+export const Wave = styled.div`
+    width: 80%;
+    height: 200px;
+`
+export const PlayButton = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    border-radius: 50%;
+    border: solid;
+    border-width:2px;
+    border-color: white;
+    outline: none;
+    cursor: pointer;
+    color:white;
+    &:hover {
+        background: #fff;
+        color:#000;
+    }
+`
+export const StopButton = styled.div`
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    border-width:2px;
+    height: 60px;
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    color:white;
+    left: 42%;
+    &:hover {
+        background: #fff;
+        color:#000;
+    }
+`
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    align-items: center;
+    justify-content: center;
+`
+
+
+export const ResultContainer = styled.div`
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0);
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+    flex-direction: column;
+`
+
+export const ImageContainer = styled.div`
+    justify-content: center;
+    display: flex;
+    width: 80%;
+
+`
+export const SpectographImage = styled.img`
+    width: 100%;
+
 `
