@@ -86,9 +86,9 @@ export const Para = styled.p`
 
 export const Block = styled.div`
     display: flex;
+    width: 100%;
     flex-direction: column-reverse;
     animation: moving 0.2s ease-in-out ;
-
     padding: 40px;
     margin-top: auto;
     background-color: rgba(50,50,50,0.5);

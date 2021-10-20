@@ -88,13 +88,13 @@ function SvgComponent(props) {
         <style>{`.prefix__cls-4{fill:#fff; animation: a 6s ease-in-out infinite}       
                   @keyframes a {
                     0% {
-                      fill:#000;
-                    }
-                    50% {
                       fill:#fff;
                     }
-                    100% {
+                    50% {
                       fill:#000;
+                    }
+                    100% {
+                      fill:#fff;
                     }
                   }
         

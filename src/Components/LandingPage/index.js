@@ -17,7 +17,7 @@ const LandingPage = () => {
                     <DetailContainer>
                         <Title >Neural <Title style={{color:'yellow'}}>Music</Title></Title>
                         <Para>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                            Music is one of the most universal ways of expression and communication. Each human can at least think of one song that gives mental calmness or a song that can energize whole body. As of that its hard to stimulate such thought process through some basic zeros and ones, the human way of thinking or predicting the next lines or pattern in song is truly marvelous job of biological neuruons. Neural Music is a Research project trying to stimulate the same actions and thought process as that of human brain can achieve. As this sound impossible while it is possible as in advancement in deep neural networks and machine learning.
                         </Para>
 
                         <StyledButton to="/selector" onMouseEnter={()=>{setHoverOverButton(true)}} onMouseLeave={()=>{setHoverOverButton(false)}}>

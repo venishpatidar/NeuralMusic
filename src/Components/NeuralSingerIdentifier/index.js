@@ -21,6 +21,9 @@ class NeuralSingerIdentifier extends React.Component {
             err:false,
             errmessage:'',
             isLoading:false,
+            audioUrl:'',
+            KishoreKumar:'',
+            LataMangeshkar:''
         }
     }
     
@@ -41,57 +44,86 @@ class NeuralSingerIdentifier extends React.Component {
     }
 
     UploadFile = ()=>{
-        this.setState({uploaded:true})
-        this.waveform = WaveSurfer.create({
-            barWidth: 2,
-            cursorWidth: 1,
-            container: '#waveform',
-            backend: 'WebAudio',
-            height: 200,
-            width: '50%',
-            progressColor: '#ff6103',
-            responsive: true,
-            waveColor: '#fff',
-            cursorColor: 'transparent',
-            });
-        const track = document.querySelector('#track');
-        this.waveform.load(track);
-        this.waveform.on('finish',()=>{
-            this.setState({playing:false})
-            console.log('a')
-        })
+
+        this.setState({isLoading:true})
+
+        const reader = new FileReader();
+
+        reader.addEventListener("load", async ()=> {
+
+
+            const wav = new Blob([reader.result], { type: 'audio/wav' })
+            const url = window.URL.createObjectURL(wav)
+
+            this.setState({audioUrl:url})
+
+            this.waveform = WaveSurfer.create({
+                barWidth: 2,
+                cursorWidth: 1,
+                container: '#waveform',
+                backend: 'WebAudio',
+                height: 200,
+                width: '50%',
+                progressColor: '#ff6103',
+                responsive: true,
+                waveColor: '#fff',
+                cursorColor: 'transparent',
+                });
+            const track = document.querySelector('#track');
+            this.waveform.load(track);
+    
+            this.waveform.on('finish',()=>{
+                this.setState({playing:false})
+            })
+ 
+        }, false);
+      
+        if (this.state.file) {
+          reader.readAsArrayBuffer(this.state.file);
+        }
+
         
-        // const formData = new FormData()
-        // formData.append(
-        //     "audioFile",
-        //     this.state.file,
-        //     this.state.SelectedFileName
-        // )
+        const formData = new FormData()
+        formData.append(
+            'audioFile',
+            this.state.file,
+            this.state.SelectedFileName
+        )
 
 
-        // fetch(NEURAL_SINGER_IDENTIFIER_SERVER_ADDR,{
-        //     method:'POST',
-        //     body:formData,
-        //     headers: {
-        //         'Content-Type':'multipart/form-data',
-        //     },
-        // })
-        // .then((response)=>{
-        //     return response.json()
-        // })
-        // .then((response)=>{
-        //     this.setState({uploaded:true})
-        //     console.log(response)
-        // })
+        fetch(NEURAL_SINGER_IDENTIFIER_SERVER_ADDR,{
+            method:'POST',
+            body:formData,
+        })
+        .then((response)=>{
+            if(response.status===200){
+                return response.json()
+            }
+            else{
+                var error = new Error('Error on server side ERROR STATUS ' + response.status + ': ' + response.statusText+' Please refresh or press F5');
+                error.response = response;
+                throw error;
 
-       
+            }
+        },error=>{throw error})
+        .then((response)=>{
+            this.setState({uploaded:true})
+            this.setState({KishoreKumar:response[1],LataMangeshkar:response[2],isLoading:false,uploaded:true})
+        })
+        .catch((error)=>{
+            if(error.message==="Failed to fetch"){
+                this.setState({isLoading:false,err:true,errmessage:"UH OH.... SERVER DOWN"})
+            }
+            else{
+                this.setState({isLoading:false,err:true,errmessage:error.message})
+            }
+        })
 
     }
     
     
     render(){
       
-        const url = 'https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3';
         return (
             <Canvas>
                 <Container>
@@ -124,7 +156,7 @@ class NeuralSingerIdentifier extends React.Component {
                     }
 
 
-                    <ContentContainer>
+                        <ContentContainer style={{filter:this.state.isLoading?'blur(20px)':''}}> 
                         
                             {!this.state.uploaded?
                                 <div style={{position:'absolute',display:'flex',flexDirection:'column',width:'100%',alignItems:'center',zIndex:this.state.uploaded?2:3}}>
@@ -139,7 +171,12 @@ class NeuralSingerIdentifier extends React.Component {
                                     </UploadButton>
                                     
                                     <UploadButton onClick={()=>{
-                                        this.UploadFile();
+                                        if(this.state.file!==null){
+                                            this.UploadFile();
+                                        }
+                                        else{
+                                            this.setState({err:true,errmessage:"Error: Unable to upload, No file was selected"})
+                                        }
                                         // this.setState({uploaded:true})
                                         // const track = document.querySelector('#track');
 
@@ -156,7 +193,7 @@ class NeuralSingerIdentifier extends React.Component {
                         
                             <WaveformContianer style={{zIndex:this.state.uploaded?3:2,visibility:this.state.uploaded?'visible':'hidden'}}>
                                 <Wave id="waveform" />
-                                <audio id="track" src={url} />  
+                                <audio id="track" src={this.state.audioUrl} />  
                                 <ButtonContainer>
                                     {this.state.playing?
                                         <StopButton onClick={()=>{
@@ -196,7 +233,7 @@ class NeuralSingerIdentifier extends React.Component {
                                             <Image src="https://static.toiimg.com/photo/msid-71551195/71551195.jpg?80178" />
                                             <NameContainer>
                                                 <SingerName>Kishore Kumar</SingerName>
-                                                <MatchPercentage>82%</MatchPercentage>
+                                                <MatchPercentage>{this.state.KishoreKumar}</MatchPercentage>
                                             </NameContainer>
                                         </div>
 
@@ -204,7 +241,7 @@ class NeuralSingerIdentifier extends React.Component {
                                             <Image src="https://static.toiimg.com/thumb/56933883.cms?width=170&height=240" />
                                             <NameContainer>
                                                 <SingerName>Lata Mangeshkar</SingerName>
-                                                <MatchPercentage>12%</MatchPercentage>
+                                                <MatchPercentage>{this.state.LataMangeshkar}</MatchPercentage>
                                             </NameContainer>
                                         </div>
 

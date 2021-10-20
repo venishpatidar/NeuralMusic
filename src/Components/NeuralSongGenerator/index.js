@@ -51,7 +51,6 @@ class NeuralSongGenerator extends React.Component{
         .then(response=>{
             var latent_vector =JSON.parse(response.latent_vector)
             var scale = JSON.parse(response.scale)
-            console.log(latent_vector)
             this.setState({latent_vector:latent_vector,scale:scale,isLoading:false,err:false,errMessage:''})
         })
         .catch((error)=>{
@@ -144,7 +143,6 @@ class NeuralSongGenerator extends React.Component{
         this.waveform.load(track);
         this.waveform.on('finish',()=>{
             this.setState({playing:false})
-            console.log('a')
         })
         
     }

@@ -26,10 +26,10 @@ const ListTitles  =  [
 ]
 
 const ListDetails = [
-"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
-"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
-"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
-"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
+"Neural Piano is an A.I. duet, where you can play some melody on keyboard and then it's A.I.'s turn to play melody in harmony with your created melody, as that of human would play. Morever there's lot more than just piano, User can select any instrument from the list of instrument (on right top side).",
+"Neural Singer Identifier is an Artificial Intelligence that can predict the name of singer whose song would be uploaded by user. Each song that will be uploaded to Neural Singer Identifier must be 10 sec long and contain singer's voice in at least 80% of through out the track. Uploading song more than 10 sec long will be reult in randomly chosen 10 sec long track from it and giving prediciton on that track",
+"Neural Lyrics Generator is an Artificial Intelligence that can generate or suggest lyrics ( If no input is given ), It can also complete the rest of lyrics provided few lines. Default length of prediciton is 400 words (prediction of more or dynamical words is future work).",
+"Neural Music is an Artificial Intelligence that can generate music (well at least reminiscence of song currently kishore kumar's song) in kishore kumar voice, Intresting fact it is research project which treats sees audio signal and generating song based on it. User can see latent vector in neural song generator, this latent vector is then going to get transform into song, it intresting and mind blowing thing to observe that simple zeros and ones can do lot more. This section is created keeping in mind that fact mind can still humm or at least recall the pattern of song after hearing it for first time.",
 ]
 
 
@@ -82,7 +82,7 @@ const SelectorPage = () => {
                         null
                         :
                         <Block>
-                            <Para>
+                            <Para style={{width:'60%'}}>
                                 {ListDetails[selectedOption]}
                             </Para>
                             <div style={{width:"50%",height:"5px",background:'white',marginBottom:"20px"}}></div>

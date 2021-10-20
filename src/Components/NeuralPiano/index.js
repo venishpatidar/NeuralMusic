@@ -3,7 +3,6 @@ import Canvas from '../Canvas'
 import { Container, Header, HeaderContainer, InstrumentListContainer, InstrumentSelectionContainer, ListItems, LoaderContainer, LoaderImage, Para, PianoContainer } from './NeuralPianoComponent'
 import CircularButton from '../CircularButton'
 import {NEURAL_PIANO_SERVER_ADDR} from './../../utils';
-import { BsArrowUp } from 'react-icons/bs';
 
 const INSTRUMENT_LIST = [
     "accordion",
@@ -277,7 +276,6 @@ function PianoFirstHalf(props) {
                 }}
                 
                 onMouseDownCapture={()=>{
-                    console.log(keys[1])
                     Piano.then((piano)=> {
                         piano.play(keys[1])
                     })
@@ -594,6 +592,7 @@ export default class NeuralPiano extends React.Component{
                     this.Piano.then((piano)=>{
                         piano.play(KeyboardToToneMap[e.key.toLowerCase()])
                         CreateKeyTrail(KeyboardToToneMap[e.key.toLowerCase()]);
+                        this.addToKeyHitory(KeyboardToToneMap[e.key.toLowerCase()])
                     })
                 }
             }
@@ -601,7 +600,6 @@ export default class NeuralPiano extends React.Component{
                 // Not Mapped Key
             }
         }
-        document.addEventListener('keydown',this.listenr);
         
         this.state={
             loaded:false,
@@ -651,9 +649,11 @@ export default class NeuralPiano extends React.Component{
         })
 
     }
-
+    componentDidMount(){
+        document.addEventListener('keydown',this.listenr);
+    }
     componentWillUnmount(){
-        document.removeEventListener('keydown',this.listenr)
+        document.removeEventListener('keydown',this.listenr,false )
     }
 
     addToKeyHitory(key){
@@ -730,7 +730,6 @@ export default class NeuralPiano extends React.Component{
                         CreateKeyTrail(PREDICT[i],null,'#ffa812');
                     }
                     catch{
-                        console.log(i)
                     }
                    
                     piano.stop(this.ac.currentTime + 0.5)
@@ -813,7 +812,7 @@ export default class NeuralPiano extends React.Component{
                                 cont.style.height = '50%'
                                 this.setState({showInstrumentList:true})
                                 }} style={{width:'100%',display:'flex',alignItems:'center'}}>
-                                <Para style={{width:'100%',textAlign:'center',}}>{this.state.selectedInstrument}</Para>
+                                <Para style={{width:'100%',textAlign:'center',}}>{this.state.selectedInstrument.replace(/_/g,' ')}</Para>
                             </div>
                             }
                         </InstrumentSelectionContainer>

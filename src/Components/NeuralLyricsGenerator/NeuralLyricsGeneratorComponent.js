@@ -97,8 +97,8 @@ export const GeneratedText = styled.p`
 
 
 export const LoaderImage = styled.img`
-    width: 250px;
-    height: 250px;
+    width: 400px;
+    height: 400px;
     object-fit: fill;
     position: absolute;
     animation: rotateLoaderLogo 2s ease-in-out infinite;
